@@ -83,7 +83,9 @@ const runTest = (name, command, args = [], timeout = 120000) => {
     unit: null,
     e2eSignup: null,
     e2eMultiUser: null,
-    e2eResumeNav: null
+    e2eResumeNav: null,
+    e2eSkillsTree: null,
+    e2eResumeComparison: null
   };
 
   // 1. Unit tests
@@ -113,6 +115,22 @@ const runTest = (name, command, args = [], timeout = 120000) => {
     results.e2eResumeNav = { success: false, skipped: true };
   }
 
+  // 5. E2E Skills Tree and Resume tests (if servers running)
+  if (backendOk && frontendOk) {
+    results.e2eSkillsTree = await runTest('E2E Skills Tree and Resume Tests', 'node', ['tests/e2e-puppeteer/skills-tree-and-resume.test.js'], 120000);
+  } else {
+    log('\n⏭️  Skipping E2E Skills Tree Tests (servers not running)', 'yellow');
+    results.e2eSkillsTree = { success: false, skipped: true };
+  }
+
+  // 6. E2E Resume Comparison Drag-and-Drop tests (if servers running)
+  if (backendOk && frontendOk) {
+    results.e2eResumeComparison = await runTest('E2E Resume Comparison Drag-and-Drop Tests', 'node', ['tests/e2e-puppeteer/resume-comparison-drag-drop.test.js'], 120000);
+  } else {
+    log('\n⏭️  Skipping E2E Resume Comparison Tests (servers not running)', 'yellow');
+    results.e2eResumeComparison = { success: false, skipped: true };
+  }
+
   // Summary
   log('\n' + '='.repeat(70), 'cyan');
   log('TEST RESULTS SUMMARY', 'cyan');
@@ -121,7 +139,9 @@ const runTest = (name, command, args = [], timeout = 120000) => {
   const allPassed = results.unit.success && 
     (results.e2eSignup.skipped || results.e2eSignup.success) &&
     (results.e2eMultiUser.skipped || results.e2eMultiUser.success) &&
-    (results.e2eResumeNav.skipped || results.e2eResumeNav.success);
+    (results.e2eResumeNav.skipped || results.e2eResumeNav.success) &&
+    (results.e2eSkillsTree.skipped || results.e2eSkillsTree.success) &&
+    (results.e2eResumeComparison.skipped || results.e2eResumeComparison.success);
 
   log(`\nUnit Tests: ${results.unit.success ? '✅ PASSED' : '❌ FAILED'}`, results.unit.success ? 'green' : 'red');
   
@@ -141,6 +161,18 @@ const runTest = (name, command, args = [], timeout = 120000) => {
     log(`E2E Resume Nav: ⏭️  SKIPPED (servers not running)`, 'yellow');
   } else {
     log(`E2E Resume Nav: ${results.e2eResumeNav.success ? '✅ PASSED' : '❌ FAILED'}`, results.e2eResumeNav.success ? 'green' : 'red');
+  }
+  
+  if (results.e2eSkillsTree.skipped) {
+    log(`E2E Skills Tree: ⏭️  SKIPPED (servers not running)`, 'yellow');
+  } else {
+    log(`E2E Skills Tree: ${results.e2eSkillsTree.success ? '✅ PASSED' : '❌ FAILED'}`, results.e2eSkillsTree.success ? 'green' : 'red');
+  }
+  
+  if (results.e2eResumeComparison.skipped) {
+    log(`E2E Resume Comparison: ⏭️  SKIPPED (servers not running)`, 'yellow');
+  } else {
+    log(`E2E Resume Comparison: ${results.e2eResumeComparison.success ? '✅ PASSED' : '❌ FAILED'}`, results.e2eResumeComparison.success ? 'green' : 'red');
   }
 
   log('\n' + '='.repeat(70), 'cyan');

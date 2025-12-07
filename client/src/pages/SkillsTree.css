@@ -1,0 +1,216 @@
+.skills-tree {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.skills-tree__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.skills-tree__title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.skills-tree__subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.skills-tree__alert {
+  margin-bottom: 1.5rem;
+}
+
+.skills-tree__tabs {
+  margin-bottom: 2rem;
+}
+
+.skills-tree__tabs .nav-link {
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.skills-tree__card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.skills-tree__card-body {
+  padding: 2rem;
+  min-height: 800px;
+}
+
+.skills-tree__main-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.skills-tree__tree-card {
+  grid-column: 1;
+}
+
+.skills-tree__sidebar-card {
+  grid-column: 2;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.skills-tree__sidebar-body {
+  padding: 1.5rem;
+}
+
+.skills-tree__sidebar-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.skills-tree__sidebar-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.skills-tree__empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+}
+
+.skills-tree__skills-list {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.skills-tree__skill-item {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.skills-tree__skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+.skills-tree__skill-name {
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.skills-tree__remove-btn {
+  color: #dc3545;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.skills-tree__remove-btn:hover {
+  color: #c82333;
+  text-decoration: none;
+}
+
+.skills-tree__skill-description {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.skills-tree__skill-type {
+  font-size: 0.75rem;
+}
+
+.skills-tree__actions {
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+}
+
+.skills-tree__section-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.skills-tree__section-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.skills-tree__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.skills-tree__stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.skills-tree__stat-card h4 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.skills-tree__stat-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.skills-tree__top-skills {
+  margin-top: 2rem;
+}
+
+.skills-tree__skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #4A90E2;
+}
+
+.skills-tree__skill-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.skills-tree__skill-level {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.skills-tree__jobs-list {
+  margin-top: 2rem;
+}
+

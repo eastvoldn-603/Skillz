@@ -19,6 +19,9 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/resumes', require('./routes/resumes'));
 app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/skills', require('./routes/skills'));
+app.use('/api/feed', require('./routes/feed'));
+app.use('/api/connections', require('./routes/connections'));
 
 // Health check
 app.get('/api/health', (req, res) => {

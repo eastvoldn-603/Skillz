@@ -144,4 +144,107 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Get skills for a specific resume
+router.get('/:id/skills', async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const resumeId = req.params.id;
+
+    // Verify ownership
+    const resume = db.prepare('SELECT id FROM resumes WHERE id = ? AND user_id = ?').get(resumeId, userId);
+    if (!resume) {
+      return res.status(404).json({ error: 'Resume not found' });
+    }
+
+    // Get skills associated with this resume
+    const resumeSkills = db.prepare(`
+      SELECT 
+        rs.skill_id,
+        us.level as user_level,
+        us.experience_points as user_experience,
+        s.name as skill_name,
+        s.description,
+        s.skill_type,
+        s.max_level,
+        s.icon,
+        c.name as category_name,
+        c.color as category_color
+      FROM resume_skills rs
+      JOIN user_skills us ON rs.skill_id = us.skill_id AND us.user_id = ?
+      JOIN skills s ON rs.skill_id = s.id
+      LEFT JOIN skill_categories c ON s.category_id = c.id
+      WHERE rs.resume_id = ?
+      ORDER BY s.name
+    `).all(userId, resumeId);
+
+    res.json(resumeSkills);
+  } catch (error) {
+    console.error('Get resume skills error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Add skill to resume
+router.post('/:id/skills/:skillId', async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const resumeId = req.params.id;
+    const skillId = req.params.skillId;
+
+    // Verify ownership
+    const resume = db.prepare('SELECT id FROM resumes WHERE id = ? AND user_id = ?').get(resumeId, userId);
+    if (!resume) {
+      return res.status(404).json({ error: 'Resume not found' });
+    }
+
+    // Verify user has this skill
+    const userSkill = db.prepare('SELECT id FROM user_skills WHERE user_id = ? AND skill_id = ?').get(userId, skillId);
+    if (!userSkill) {
+      return res.status(404).json({ error: 'Skill not found in your skills' });
+    }
+
+    // Add skill to resume (ignore if already exists due to UNIQUE constraint)
+    try {
+      db.prepare('INSERT INTO resume_skills (resume_id, skill_id) VALUES (?, ?)').run(resumeId, skillId);
+      res.json({ message: 'Skill added to resume successfully' });
+    } catch (error) {
+      if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+        res.status(400).json({ error: 'Skill already in resume' });
+      } else {
+        throw error;
+      }
+    }
+  } catch (error) {
+    console.error('Add skill to resume error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Remove skill from resume
+router.delete('/:id/skills/:skillId', async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const resumeId = req.params.id;
+    const skillId = req.params.skillId;
+
+    // Verify ownership
+    const resume = db.prepare('SELECT id FROM resumes WHERE id = ? AND user_id = ?').get(resumeId, userId);
+    if (!resume) {
+      return res.status(404).json({ error: 'Resume not found' });
+    }
+
+    // Remove skill from resume
+    const result = db.prepare('DELETE FROM resume_skills WHERE resume_id = ? AND skill_id = ?').run(resumeId, skillId);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Skill not found in resume' });
+    }
+
+    res.json({ message: 'Skill removed from resume successfully' });
+  } catch (error) {
+    console.error('Remove skill from resume error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

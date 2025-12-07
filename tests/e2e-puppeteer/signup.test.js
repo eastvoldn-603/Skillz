@@ -63,13 +63,13 @@ const runTests = async () => {
     console.log('Waiting for servers to start...');
     try {
       await waitForServer(`${BASE_URL}`);
-      await waitForServer(`${API_URL.replace('/api', '')}/api/health`);
+      await waitForServer(`${API_URL}/auth/register`);
       console.log('Servers are ready!');
     } catch (error) {
       console.warn('Servers may not be ready:', error.message);
     }
 
-    // Launch browser
+    // Launch browser with optimized settings
     browser = await puppeteer.launch({
       headless: true,
       args: [
@@ -78,8 +78,15 @@ const runTests = async () => {
         '--disable-dev-shm-usage',
         '--disable-accelerated-2d-canvas',
         '--no-first-run',
-        '--disable-gpu'
-      ]
+        '--disable-gpu',
+        '--disable-extensions',
+        '--disable-background-networking',
+        '--disable-background-timer-throttling',
+        '--disable-renderer-backgrounding',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-ipc-flooding-protection'
+      ],
+      timeout: 30000
     });
   };
 
@@ -92,9 +99,7 @@ const runTests = async () => {
   const runTest = async (testName, testFn) => {
     try {
       page = await browser.newPage();
-      await page.goto(`${BASE_URL}/signup`, { waitUntil: 'networkidle2' });
-      await page.waitForSelector('input[name="firstName"]', { timeout: 10000 });
-      
+      await page.setViewport({ width: 1280, height: 720 });
       await testFn();
       results.passed++;
       log(`✅ ${testName}`, 'success');
@@ -124,8 +129,14 @@ const runTests = async () => {
       confirmPassword: 'testpassword123'
     };
 
-    await page.goto(`${BASE_URL}/signup`, { waitUntil: 'networkidle2', timeout: 30000 });
-    await page.waitForSelector('input[name="firstName"]', { timeout: 10000 });
+    await page.goto(`${BASE_URL}/signup`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    // Wait for React to render the form
+    await page.waitForSelector('input[name="firstName"]', { timeout: 15000 });
+    // Additional wait to ensure form is fully interactive
+    await page.waitForFunction(() => {
+      const input = document.querySelector('input[name="firstName"]');
+      return input && !input.disabled;
+    }, { timeout: 5000 });
 
     // Clear any existing values
     await page.evaluate(() => {
@@ -141,13 +152,10 @@ const runTests = async () => {
     await page.type('input[name="confirmPassword"]', testData.confirmPassword);
 
     // Submit the form
-    await Promise.race([
-      Promise.all([
-        page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }),
-        page.click('button[type="submit"]')
-      ]),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('Navigation timeout')), 35000))
-    ]);
+    log('Submitting form...', 'info');
+    const navigationPromise = page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
+    await page.click('button[type="submit"]');
+    await navigationPromise;
 
     // Verify we're on the dashboard
     if (!page.url().includes('/dashboard')) {

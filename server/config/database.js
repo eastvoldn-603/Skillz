@@ -104,6 +104,137 @@ const initDatabase = () => {
       )
     `);
 
+    // Skill categories table
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS skill_categories (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL UNIQUE,
+        description TEXT,
+        icon TEXT,
+        color TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // Skills table (hard and soft skills)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS skills (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        category_id INTEGER,
+        name TEXT NOT NULL,
+        description TEXT,
+        skill_type TEXT NOT NULL CHECK(skill_type IN ('hard', 'soft')),
+        max_level INTEGER DEFAULT 10,
+        icon TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (category_id) REFERENCES skill_categories(id) ON DELETE SET NULL
+      )
+    `);
+
+    // Skill tree nodes (defines prerequisites and tree structure)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS skill_tree_nodes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        skill_id INTEGER NOT NULL,
+        parent_skill_id INTEGER,
+        position_x REAL,
+        position_y REAL,
+        tier INTEGER DEFAULT 1,
+        unlock_requirement TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE,
+        FOREIGN KEY (parent_skill_id) REFERENCES skills(id) ON DELETE SET NULL
+      )
+    `);
+
+    // User skills (user's progress in each skill)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS user_skills (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        skill_id INTEGER NOT NULL,
+        level INTEGER DEFAULT 0,
+        experience_points INTEGER DEFAULT 0,
+        unlocked_at DATETIME,
+        last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE,
+        UNIQUE(user_id, skill_id)
+      )
+    `);
+
+    // Resume skills (associates skills with specific resumes)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS resume_skills (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        resume_id INTEGER NOT NULL,
+        skill_id INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (resume_id) REFERENCES resumes(id) ON DELETE CASCADE,
+        FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE,
+        UNIQUE(resume_id, skill_id)
+      )
+    `);
+
+    // Job experiences (previous jobs that unlock skills)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS job_experiences (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        company TEXT NOT NULL,
+        position TEXT NOT NULL,
+        description TEXT,
+        start_date DATE,
+        end_date DATE,
+        skills_gained TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )
+    `);
+
+    // Skill unlocks (which jobs unlock which skills)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS skill_unlocks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        job_experience_id INTEGER NOT NULL,
+        skill_id INTEGER NOT NULL,
+        level_granted INTEGER DEFAULT 1,
+        experience_points_granted INTEGER DEFAULT 100,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (job_experience_id) REFERENCES job_experiences(id) ON DELETE CASCADE,
+        FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE CASCADE
+      )
+    `);
+
+    // Connections table (social network connections)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS connections (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        connected_user_id INTEGER NOT NULL,
+        status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'accepted', 'blocked')),
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (connected_user_id) REFERENCES users(id) ON DELETE CASCADE,
+        UNIQUE(user_id, connected_user_id),
+        CHECK(user_id != connected_user_id)
+      )
+    `);
+
+    // Posts table (social feed posts)
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        content TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )
+    `);
+
     // Create trigger to update updated_at timestamp
     db.exec(`
       CREATE TRIGGER IF NOT EXISTS update_users_timestamp 
@@ -134,6 +265,30 @@ const initDatabase = () => {
       AFTER UPDATE ON job_offers
       BEGIN
         UPDATE job_offers SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+      END
+    `);
+
+    db.exec(`
+      CREATE TRIGGER IF NOT EXISTS update_job_experiences_timestamp 
+      AFTER UPDATE ON job_experiences
+      BEGIN
+        UPDATE job_experiences SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+      END
+    `);
+
+    db.exec(`
+      CREATE TRIGGER IF NOT EXISTS update_connections_timestamp 
+      AFTER UPDATE ON connections
+      BEGIN
+        UPDATE connections SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+      END
+    `);
+
+    db.exec(`
+      CREATE TRIGGER IF NOT EXISTS update_posts_timestamp 
+      AFTER UPDATE ON posts
+      BEGIN
+        UPDATE posts SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
       END
     `);
 

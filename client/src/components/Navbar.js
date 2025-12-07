@@ -25,7 +25,7 @@ const Navbar = () => {
             <>
               <Nav className="me-auto navbar__nav">
                 <Nav.Link as={Link} to="/dashboard" className="navbar__link">
-                  Dashboard
+                  Home Page
                 </Nav.Link>
                 <Nav.Link as={Link} to="/resumes" className="navbar__link">
                   Resumes
@@ -38,6 +38,9 @@ const Navbar = () => {
                 </Nav.Link>
                 <Nav.Link as={Link} to="/offers" className="navbar__link">
                   Offers
+                </Nav.Link>
+                <Nav.Link as={Link} to="/skills-tree" className="navbar__link">
+                  🎮 Skills Tree
                 </Nav.Link>
                 <Nav.Link as={Link} to="/profile" className="navbar__link">
                   Profile

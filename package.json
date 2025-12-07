@@ -18,7 +18,12 @@
     "test:e2e:resume-nav": "node tests/e2e-puppeteer/resume-navigation.test.js",
     "test:all": "node run-all-tests.js",
     "test:complete": "node run-all-tests-complete.js",
-    "seed:jobs": "node server/scripts/seedJobs.js"
+    "test:fast": "node run-all-tests-fast.js",
+    "seed:jobs": "node server/scripts/seedJobs.js",
+    "seed:skills": "node server/scripts/seedSkills.js",
+    "seed:job-experiences": "node server/scripts/seedJobExperiences.js",
+    "seed:resumes": "node server/scripts/seedResumes.js",
+    "seed:all": "npm run seed:skills && npm run seed:job-experiences && npm run seed:resumes"
   },
   "keywords": [
     "resume",

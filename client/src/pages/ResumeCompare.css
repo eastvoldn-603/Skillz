@@ -1,0 +1,176 @@
+.resume-compare {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.resume-compare__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.resume-compare__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.resume-compare__row {
+  margin: 0;
+}
+
+.resume-compare__col {
+  padding: 0 1rem;
+}
+
+.resume-compare__card {
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  height: 100%;
+  min-height: 600px;
+}
+
+.resume-compare__card-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.resume-compare__card-header h3 {
+  margin: 0;
+  color: white;
+}
+
+.resume-compare__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.resume-compare__copy-all-btn {
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.resume-compare__copy-all-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.5);
+  background-color: #28a745;
+}
+
+.resume-compare__copy-all-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resume-compare__drop-zone {
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 3px dashed #28a745;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.resume-compare__section {
+  margin-bottom: 2rem;
+}
+
+.resume-compare__section h4 {
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.resume-compare__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resume-compare__skill-badge {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.resume-compare__skill-badge:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resume-compare__skill-badge:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+.resume-compare__delete-btn {
+  color: white;
+  padding: 0;
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.resume-compare__delete-btn:hover {
+  opacity: 1;
+  color: #ff4444;
+}
+
+.resume-compare__jobs {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.resume-compare__job-card {
+  border: 2px solid #e0e0e0;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.resume-compare__job-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.resume-compare__job-card:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+.resume-compare__job-card.selected {
+  border-color: #667eea;
+  background-color: #f0f4ff;
+}
+
+@media (max-width: 768px) {
+  .resume-compare__col {
+    margin-bottom: 2rem;
+  }
+
+  .resume-compare__card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .resume-compare__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .resume-compare__actions button {
+    width: 100%;
+  }
+}
+

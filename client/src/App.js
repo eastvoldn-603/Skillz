@@ -12,10 +12,13 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Resumes from './pages/Resumes';
 import ResumeForm from './pages/ResumeForm';
+import ResumeView from './pages/ResumeView';
+import ResumeCompare from './pages/ResumeCompare';
 import Jobs from './pages/Jobs';
 import JobDetail from './pages/JobDetail';
 import Applications from './pages/Applications';
 import Offers from './pages/Offers';
+import SkillsTree from './pages/SkillsTree';
 import './App.css';
 
 function App() {
@@ -35,11 +38,14 @@ function App() {
               <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
               <Route path="/resumes" element={<PrivateRoute><Resumes /></PrivateRoute>} />
               <Route path="/resumes/new" element={<PrivateRoute><ResumeForm /></PrivateRoute>} />
+              <Route path="/resumes/compare/:id1/:id2" element={<PrivateRoute><ResumeCompare /></PrivateRoute>} />
               <Route path="/resumes/:id/edit" element={<PrivateRoute><ResumeForm /></PrivateRoute>} />
+              <Route path="/resumes/:id" element={<PrivateRoute><ResumeView /></PrivateRoute>} />
               <Route path="/jobs" element={<PrivateRoute><Jobs /></PrivateRoute>} />
               <Route path="/jobs/:id" element={<PrivateRoute><JobDetail /></PrivateRoute>} />
               <Route path="/applications" element={<PrivateRoute><Applications /></PrivateRoute>} />
               <Route path="/offers" element={<PrivateRoute><Offers /></PrivateRoute>} />
+              <Route path="/skills-tree" element={<PrivateRoute><SkillsTree /></PrivateRoute>} />
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </div>

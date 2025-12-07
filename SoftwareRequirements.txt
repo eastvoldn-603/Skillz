@@ -5,12 +5,12 @@ II. Tech Stack
 - Frontend: React, Bootstrap, HTML, CSS
 - Frontend CSS Naming Convention: BEM
 - Backend: Node.js and other libraries as needed
-- Database: MySQL
+- Database: SQLite (better-sqlite3)
 - Hosting: Azure
 - Infrastructure: Terraform
 - CI/CD: GitHub Actions
 - Code Repository / Version Control: GitHub
-- Testing: Jest
+- Testing: Jest (unit tests), Puppeteer (E2E tests)
 - Documentation: Markdown
 
 III. Features
@@ -29,9 +29,60 @@ III. Features
 - Users can edit their resume.
 - Users can delete their resume.
 - Users can view their resume.
-- Users can edit their resume.
-- Users can delete their resume.
 - Users can create / delete / edit multiple resumes.
+- Skills are associated with specific resumes (resume_skills table).
+- Deleting a skill from a resume only removes it from that resume, not from other resumes or the user's skills list.
+- Users can create resumes directly from the skills tree by selecting skills.
+- Users can update existing resumes from the skills tree by selecting a resume from a dropdown.
+- Pre-populated sample resumes are available for testing and demonstration.
+
+2.1. Skills Tree (Game-like Resume Builder)
+- Users can view an interactive skills tree that visualizes their career progression.
+- Users can see hard skills (technical skills like programming languages, frameworks, databases, DevOps).
+- Users can see soft skills (communication, leadership, problem-solving, design).
+- Skills are organized in a tiered tree structure with prerequisites.
+- All skills are visible and clickable (no locked/unlocked concept - all skills are available).
+- Users can click on skills in the tree to add them to a selection list (clicking again removes them).
+- Selected skills appear in a side panel with title and description.
+- Users can remove skills from the selection list using the × button.
+- Users can create new resumes from selected skills in the side panel (opens modal with text input for title).
+- Users can update existing resumes by selecting from a dropdown and adding selected skills (opens modal with dropdown to select resume).
+- Skills tree uses vibrant, colorful gradients and bright colors for better visual appeal.
+- Skill icons are large (45px radius, 32px font) with skill names displayed below.
+- Skills tree area is large (800px height) for better visibility.
+- Users can add job experiences that automatically unlock related skills.
+- Users can view statistics about their skill progression (total skills, levels, experience points).
+- The skills tree is interactive with zoom and node selection capabilities.
+- Skills are categorized by type (hard/soft) and by domain (Programming, Frameworks, Databases, etc.).
+- Hover effects on skills provide visual feedback without causing flickering or movement.
+- Pre-populated sample resumes (5 resumes) and job experiences (10 experiences) can be seeded for testing.
+
+2.2. Resume Skills Tree View
+- Users can view resumes in a traditional text format.
+- Users can view resumes in a skills tree visualization format.
+- Users can switch between text view and skills tree view for any resume.
+- Skills tree view displays only the skills associated with that specific resume (resume-specific skills).
+- Users can convert skills tree view to traditional text format.
+- Converted text includes skills organized by category with levels and experience points.
+- Users can copy converted resume text to clipboard.
+- Users can export converted resume text as a text file.
+- Resume view includes both the skills tree visualization and a text preview of the converted format.
+- Skills tree graphics use vibrant, colorful gradients for better visual appeal.
+
+2.3. Resume Comparison
+- Users can compare two resumes side-by-side on the same screen.
+- Comparison view shows skills and job experiences for both resumes (resume-specific data).
+- Users can select skills and job experiences by clicking on them.
+- Selected items can be copied from one resume to another using a single "Copy All Selected" button (prominent green button).
+- Users can drag and drop skills and job experiences between resumes.
+- Drag-and-drop provides visual feedback with drop zones (green border and background highlight when dragging over).
+- Drag-and-drop uses dataTransfer API with multiple formats (JSON and text) for reliability.
+- Users can delete skills and job experiences directly from the comparison view.
+- Delete operations require confirmation before execution (modal with "Remove from Resume" button).
+- Comparison view provides visual feedback for selected items (highlighted badges/cards).
+- Skills are resume-specific (deleting a skill from one resume only removes it from that resume, not from other resumes).
+- Skills are resume-specific (deleting a skill from one resume does not remove it from the user's overall skills list).
+- Skills can be dragged from one resume to another, and the skill is added to the target resume's resume_skills table.
 
 3. Job Application Management
 - Users can apply to a job.
@@ -64,6 +115,20 @@ IV. Testing
 - End-to-end tests will verify users can apply with multiple resumes to the same job.
 - End-to-end tests will verify resume navigation from applications page.
 - End-to-end tests will verify job posting navigation from applications page.
+- End-to-end tests will verify skills can be unlocked when adding job experiences.
+- End-to-end tests will verify click-to-unlock functionality for skills in the skills tree.
+- End-to-end tests will verify resume skills tree view functionality.
+- End-to-end tests will verify conversion from skills tree view to text format.
+- End-to-end tests will verify resume comparison functionality.
+- End-to-end tests will verify skills and job experiences can be copied between resumes.
+- End-to-end tests will verify skills and job experiences can be deleted from resumes.
+- End-to-end tests will verify drag-and-drop functionality for copying skills between resumes.
+- End-to-end tests will verify drag-and-drop functionality for copying job experiences between resumes.
+- End-to-end tests will verify resume-specific skill deletion (skill removed from one resume only).
+- End-to-end tests will verify skills tree side panel functionality (selecting skills, creating/updating resumes).
+- End-to-end tests will verify creating resumes from skills tree with selected skills.
+- End-to-end tests will verify updating existing resumes from skills tree with selected skills.
+- End-to-end tests will verify resume dropdown selection when updating resumes from skills tree.
 
 V. Feature Enhancements
 - Multiple users can apply to the same job (each user maintains their own applications).
@@ -72,3 +137,23 @@ V. Feature Enhancements
 - Users can navigate directly to view job postings from the job applications table.
 - Temporary test jobs are available for development and testing (10 sample jobs).
 - Job applications are isolated per user (users cannot see other users' applications).
+- Skills Tree feature provides a game-like, visual way to build and track career progression.
+- Skills can be unlocked through job experience, creating a dynamic resume building experience.
+- Skill tree includes 30+ predefined skills across 8 categories (Programming, Frameworks, Databases, DevOps, Communication, Leadership, Problem Solving, Design).
+- Users can select specific skills to unlock when adding job experiences (skill selection UI).
+- Sample job experiences can be seeded for testing and demonstration purposes.
+- Resumes can be viewed in both traditional text format and interactive skills tree format.
+- Skills tree view can be converted to traditional resume text format with skills organized by category.
+- Users can click on locked skills to unlock them directly from the skills tree.
+- Resume skills tree view shows only unlocked skills (locked skills are filtered out).
+- Skills tree graphics use vibrant gradients and bright colors for enhanced visual appeal.
+- Users can compare multiple resumes side-by-side with selectable and copyable skills/jobs.
+- Users can delete skills and job experiences from resumes in the comparison view.
+- Users can drag and drop skills and job experiences between resumes in the comparison view.
+- Skills are resume-specific (each resume maintains its own set of skills independently).
+- Deleting a skill from a resume only affects that specific resume.
+- Skills tree side panel displays selected skills with titles and descriptions.
+- Users can create new resumes or update existing resumes from the skills tree side panel.
+- Resume update modal uses a dropdown to select existing resumes instead of text input.
+- Pre-populated resumes and job experiences can be seeded for testing and demonstration.
+- Sample data includes 5 pre-populated resumes and 10 job experiences.
