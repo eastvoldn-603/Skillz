@@ -1,0 +1,45 @@
+.resumes {
+  padding: 2rem 0;
+}
+
+.resumes__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.resumes__title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.resumes__new-button {
+  padding: 0.5rem 1.5rem;
+}
+
+.resumes__table {
+  margin-top: 2rem;
+}
+
+.resumes__action-button {
+  margin-right: 0.5rem;
+}
+
+.resumes__empty {
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resumes__alert {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .resumes__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+

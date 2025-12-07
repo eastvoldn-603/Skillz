@@ -1,0 +1,50 @@
+.resume-form {
+  padding: 2rem 0;
+}
+
+.resume-form__title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.resume-form__card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resume-form__form {
+  margin-top: 1.5rem;
+}
+
+.resume-form__form-group {
+  margin-bottom: 1.5rem;
+}
+
+.resume-form__label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.resume-form__input {
+  padding: 0.75rem;
+}
+
+.resume-form__textarea {
+  padding: 0.75rem;
+  font-family: monospace;
+}
+
+.resume-form__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.resume-form__button {
+  padding: 0.75rem 2rem;
+  font-weight: 500;
+}
+
+.resume-form__alert {
+  margin-bottom: 1rem;
+}
+

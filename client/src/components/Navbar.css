@@ -1,0 +1,25 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar__nav {
+  align-items: center;
+}
+
+.navbar__link {
+  margin: 0 0.5rem;
+}
+
+.navbar__user {
+  color: white;
+}
+
+.navbar__logout {
+  margin-left: 0.5rem;
+}
+

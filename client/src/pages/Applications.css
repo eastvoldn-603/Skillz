@@ -1,0 +1,48 @@
+.applications {
+  padding: 2rem 0;
+}
+
+.applications__title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.applications__table {
+  margin-top: 2rem;
+}
+
+.applications__action-button {
+  margin-right: 0.5rem;
+}
+
+.applications__resume-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.applications__resume-link:hover {
+  color: #0a58ca;
+  text-decoration: underline;
+}
+
+.applications__job-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.applications__job-link:hover {
+  color: #0a58ca;
+  text-decoration: underline;
+}
+
+.applications__empty {
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.applications__alert {
+  margin-bottom: 1rem;
+}
+

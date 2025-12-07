@@ -1,0 +1,26 @@
+.offers {
+  padding: 2rem 0;
+}
+
+.offers__title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.offers__table {
+  margin-top: 2rem;
+}
+
+.offers__action-button {
+  margin-right: 0.5rem;
+}
+
+.offers__empty {
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offers__alert {
+  margin-bottom: 1rem;
+}
+

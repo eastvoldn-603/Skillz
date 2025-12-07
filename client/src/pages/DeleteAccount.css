@@ -1,0 +1,54 @@
+.delete-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+}
+
+.delete-account__container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.delete-account__card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-account__title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #dc3545;
+}
+
+.delete-account__warning {
+  margin-bottom: 1.5rem;
+}
+
+.delete-account__form {
+  margin-bottom: 1rem;
+}
+
+.delete-account__form-group {
+  margin-bottom: 1.5rem;
+}
+
+.delete-account__label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.delete-account__input {
+  padding: 0.75rem;
+}
+
+.delete-account__button {
+  padding: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.delete-account__alert {
+  margin-bottom: 1rem;
+}
+

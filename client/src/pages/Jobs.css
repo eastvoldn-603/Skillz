@@ -1,0 +1,61 @@
+.jobs {
+  padding: 2rem 0;
+}
+
+.jobs__title {
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.jobs__list {
+  margin-top: 2rem;
+}
+
+.jobs__card {
+  height: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.jobs__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.jobs__card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.jobs__card-company {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.jobs__card-location,
+.jobs__card-salary {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.jobs__card-description {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+  min-height: 60px;
+}
+
+.jobs__card-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+.jobs__empty {
+  margin-top: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jobs__alert {
+  margin-bottom: 1rem;
+}
+

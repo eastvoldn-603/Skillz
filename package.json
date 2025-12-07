@@ -1,0 +1,47 @@
+{
+  "name": "skillz",
+  "version": "1.0.0",
+  "description": "A LinkedIn-like platform for managing multiple resumes and job applications",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/index.js",
+    "client": "cd client && npm start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "node tests/e2e-puppeteer/signup.test.js",
+    "test:e2e:puppeteer": "node tests/e2e-puppeteer/signup.test.js",
+    "test:e2e:full": "node tests/e2e-puppeteer/full-application.test.js",
+    "test:e2e:multi-user": "node tests/e2e-puppeteer/multi-user-job-application.test.js",
+    "test:e2e:resume-nav": "node tests/e2e-puppeteer/resume-navigation.test.js",
+    "test:all": "node run-all-tests.js",
+    "test:complete": "node run-all-tests-complete.js",
+    "seed:jobs": "node server/scripts/seedJobs.js"
+  },
+  "keywords": [
+    "resume",
+    "job-application",
+    "linkedin-alternative"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^9.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "puppeteer": "^24.32.0",
+    "supertest": "^6.3.3"
+  }
+}

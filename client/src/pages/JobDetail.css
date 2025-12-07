@@ -1,0 +1,63 @@
+.job-detail {
+  padding: 2rem 0;
+}
+
+.job-detail__back {
+  margin-bottom: 2rem;
+}
+
+.job-detail__card {
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.job-detail__title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.job-detail__company {
+  font-size: 1.25rem;
+}
+
+.job-detail__info {
+  margin-bottom: 1rem;
+}
+
+.job-detail__description {
+  margin-top: 1.5rem;
+}
+
+.job-detail__description-text {
+  margin-top: 0.5rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.job-detail__form {
+  margin-top: 1.5rem;
+}
+
+.job-detail__form-group {
+  margin-bottom: 1.5rem;
+}
+
+.job-detail__label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.job-detail__input {
+  padding: 0.75rem;
+}
+
+.job-detail__button {
+  padding: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.job-detail__alert {
+  margin-bottom: 1rem;
+}
+

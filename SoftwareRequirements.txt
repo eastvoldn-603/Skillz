@@ -1,0 +1,74 @@
+I. Summary
+- This project is a web site that is like LinkedIn but allows users to maintain multiple resumes and apply to jobs.
+
+II. Tech Stack
+- Frontend: React, Bootstrap, HTML, CSS
+- Frontend CSS Naming Convention: BEM
+- Backend: Node.js and other libraries as needed
+- Database: MySQL
+- Hosting: Azure
+- Infrastructure: Terraform
+- CI/CD: GitHub Actions
+- Code Repository / Version Control: GitHub
+- Testing: Jest
+- Documentation: Markdown
+
+III. Features
+1. User Account Management
+- Users can create an account and login to the system.
+- Users can logout of the system.
+- Users can reset their password if they forget it.
+- Users can change their password if they want to.
+- Users can delete their account if they want to.
+- Users can view their profile information.
+- Users can edit their profile information.
+- Users can delete their profile information.
+
+2. Resume Management
+- Users can create a new resume.
+- Users can edit their resume.
+- Users can delete their resume.
+- Users can view their resume.
+- Users can edit their resume.
+- Users can delete their resume.
+- Users can create / delete / edit multiple resumes.
+
+3. Job Application Management
+- Users can apply to a job.
+- Users can view their job applications.
+- Users can edit their job applications.
+- Users can delete their job applications.
+- Users can view their job offers.
+- Users can edit their job offers.
+- Users can delete their job offers.
+- Multiple users can apply to the same job.
+- Users can apply to the same job with multiple different resumes.
+- Users can navigate to view/edit resumes from their job applications page.
+- Users can apply to multiple different jobs with the same resume.
+
+4. Login / Password Reset / Account Deletion Pages
+- There will be a login page that will allow users to login to the system.
+- There will be a signup page that will allow users to create a new account.
+- There will be a forgot password page that will allow users to reset their password if they forget it.
+- There will be a change password page that will allow users to change their password if they want to.
+- There will be a delete account page that will allow users to delete their account if they want to.
+- All pages will have a logout button in the top right corner of the page.
+
+IV. Testing
+- There will be a testing suite that will test the system for any bugs or issues.
+- There will be a testing suite that will test the system for any security issues.
+- There will be a testing suite that will test the system for any performance issues.
+- There will be a testing suite that will test the system for any scalability issues.
+- There will be a testing suite that will test the system for any reliability issues.
+- End-to-end tests will verify multi-user job application scenarios.
+- End-to-end tests will verify users can apply with multiple resumes to the same job.
+- End-to-end tests will verify resume navigation from applications page.
+- End-to-end tests will verify job posting navigation from applications page.
+
+V. Feature Enhancements
+- Multiple users can apply to the same job (each user maintains their own applications).
+- Users can apply to the same job multiple times using different resumes.
+- Users can navigate directly to view/edit resumes from the job applications table.
+- Users can navigate directly to view job postings from the job applications table.
+- Temporary test jobs are available for development and testing (10 sample jobs).
+- Job applications are isolated per user (users cannot see other users' applications).
